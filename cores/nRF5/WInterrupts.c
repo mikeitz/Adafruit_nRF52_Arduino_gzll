@@ -177,11 +177,36 @@ void detachInterrupt(uint32_t pin)
   }
 }
 
+static voidFuncPtr portEventHandlerCallback = NULL;
+void attachOneShotPortEventHandler(voidFuncPtr callback) {
+  if (!enabled) {
+    __initialize();
+    enabled = 1;
+  }
+  portEventHandlerCallback = callback;
+  NRF_GPIOTE->EVENTS_PORT = 0;
+  NRF_GPIOTE->INTENSET |= GPIOTE_INTENSET_PORT_Msk;
+}
+void clearOneShotPortEventHandler() {
+  NRF_GPIOTE->INTENCLR |= GPIOTE_INTENSET_PORT_Msk;
+  NRF_GPIOTE->EVENTS_PORT = 0;
+  portEventHandlerCallback = NULL;
+}
+
 void GPIOTE_IRQHandler()
 {
 #if CFG_SYSVIEW
   SEGGER_SYSVIEW_RecordEnterISR();
 #endif
+
+  if (NRF_GPIOTE->INTENSET & GPIOTE_INTENSET_PORT_Msk) {
+    NRF_GPIOTE->INTENCLR |= GPIOTE_INTENSET_PORT_Msk;
+    NRF_GPIOTE->EVENTS_PORT = 0;
+    if (portEventHandlerCallback) {
+      ada_callback(NULL, 0, portEventHandlerCallback);
+    }
+    goto cleanup;
+  }
 
   // Read this once (not 8x), as it's a volatile read
   // across the AHB, which adds up to 3 cycles.
@@ -208,6 +233,7 @@ void GPIOTE_IRQHandler()
     // clear the event
     NRF_GPIOTE->EVENTS_IN[ch] = 0;
   }
+  cleanup:
 #if __CORTEX_M == 0x04
   // See note at nRF52840_PS_v1.1.pdf section 6.1.8 ("interrupt clearing")
   // See also https://gcc.gnu.org/onlinedocs/gcc/Volatiles.html for why

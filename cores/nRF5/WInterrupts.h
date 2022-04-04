@@ -51,6 +51,9 @@ int attachInterrupt(uint32_t pin, voidFuncPtr callback, uint32_t mode);
  */
 void detachInterrupt(uint32_t pin);
 
+void attachOneShotPortEventHandler(voidFuncPtr callback);
+void clearOneShotPortEventHandler();
+
 #ifdef __cplusplus
 }
 #endif
