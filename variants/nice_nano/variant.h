@@ -37,8 +37,8 @@ extern "C"
 #endif // __cplusplus
 
 // Number of pins defined in PinDescription array
-#define PINS_COUNT           (25)
-#define NUM_DIGITAL_PINS     (25)
+#define PINS_COUNT           (23)
+#define NUM_DIGITAL_PINS     (23)
 #define NUM_ANALOG_INPUTS    (7)
 #define NUM_ANALOG_OUTPUTS   (9)
 
@@ -55,27 +55,47 @@ extern "C"
 
 #define LED_STATE_ON         1         // State when LED is litted
 
+#define PIN_006 1
+#define PIN_008 0
+#define PIN_017 2
+#define PIN_020 3
+#define PIN_022 4
+#define PIN_024 5
+#define PIN_100 6
+#define PIN_011 7
+#define PIN_104 8
+#define PIN_106 9
+
+#define PIN_031 21
+#define PIN_029 20
+#define PIN_002 19
+#define PIN_115 18
+#define PIN_113 15
+#define PIN_111 14
+#define PIN_010 16
+#define PIN_009 10
+
+#define PIN_101 12
+#define PIN_102 17
+#define PIN_107 22
+
 /*
  * Analog pins
  */
-#define PIN_A0               (18)
-#define PIN_A1               (19)
-#define PIN_A2               (20)
-#define PIN_A3               (21)
-//#define PIN_A4               (0xff)
-//#define PIN_A5               (0xff)
-#define PIN_A6               (4)
-#define PIN_A7               (6)
-#define PIN_A8               (8)
-#define PIN_A9               (9)
-#define PIN_A10              (10)
+#define PIN_A0               PIN_115
+#define PIN_A1               PIN_002
+#define PIN_A2               PIN_029
+#define PIN_A3               PIN_031
+#define PIN_A6               PIN_022
+#define PIN_A7               PIN_100
+#define PIN_A8               PIN_104
+#define PIN_A9               PIN_106
+#define PIN_A10              PIN_009
 
 static const uint8_t A0  = PIN_A0 ;
 static const uint8_t A1  = PIN_A1 ;
 static const uint8_t A2  = PIN_A2 ;
 static const uint8_t A3  = PIN_A3 ;
-//static const uint8_t A4  = PIN_A4 ;
-//static const uint8_t A5  = PIN_A5 ;
 static const uint8_t A6  = PIN_A6 ;
 static const uint8_t A7  = PIN_A7 ;
 static const uint8_t A8  = PIN_A8 ;

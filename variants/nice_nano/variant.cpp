@@ -23,6 +23,8 @@
 #include "wiring_digital.h"
 #include "nrf.h"
 
+#define P(a, b) (a * 32 + b)
+
 const uint32_t g_ADigitalPinMap[] =
 {
   8,
@@ -31,27 +33,25 @@ const uint32_t g_ADigitalPinMap[] =
   20,
   22,
   24,
-  32,
-  43,
-  36,
-  38,
+  P(1, 0),
+  11,
+  P(1, 4),
+  P(1, 6),
 
-  9,
-  15, // 11 // blue led
-  0xff, // 12
-  13, // POWER OFF
-  43,
-  45,
-  0xff, // 16
-  0xff, // 17
-  47,
-  2,
-  29,
-  31,
+  9,        // 10
+  15,       // 11 // blue led
+  P(1, 1),  // 12 // 101 underside
+  13,       // POWER OFF
+  P(1, 11), // 14
+  P(1, 13), // 15
+  10,       // 16
+  P(1, 2),  // 17 // 102 underside
+  P(1, 15), // 18
+  2,        // 19
+  29,       // 20
+  31,       // 21
 
-  33,
-  34,
-  39,
+  P(1, 7),       // 22 // 107 underside
 };
 
 void initVariant()
